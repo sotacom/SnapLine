@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SnapLine — Native macOS Clothesline Screenshot Overlay</title>
+  <meta name="description" content="A tactile, 120fps native macOS clothesline overlay that hangs your screenshots & screen recordings as swaying Polaroids across the top of your screen." />
+  <link rel="icon" type="image/png" href="assets/app-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand">
+        <img src="assets/app-icon.png" alt="SnapLine Icon" class="brand-icon" />
+        <span class="brand-name">SnapLine</span>
+        <span class="version-pill">v1.0.0</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#preview" data-i18n="nav.preview">Preview</a>
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#install" data-i18n="nav.install">Install</a>
+        <a href="https://github.com/sotacom/SnapLine/blob/main/docs/USER_GUIDE.md" target="_blank" rel="noopener" data-i18n="nav.docs">Docs</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-toggle" role="group" aria-label="Language Switcher">
+          <button type="button" class="lang-btn active" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="vi">VI</button>
+        </div>
+        <a class="btn-ghost" href="https://github.com/sotacom/SnapLine" target="_blank" rel="noopener" aria-label="GitHub Repository">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.79 23.39c.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.49 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.34-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.53.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.24 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.6-2.81 5.62-5.49 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a class="btn-primary btn-sm" href="https://github.com/sotacom/SnapLine/releases/latest/download/SnapLine-1.0.0-macos-arm64.dmg" data-i18n="nav.download">Download</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section + Live Clothesline Playground -->
+    <section class="hero-section">
+      <div class="container hero-copy">
+        <div class="eyebrow">
+          <span class="dot"></span>
+          <span data-i18n="hero.eyebrow">Native Swift · AppKit + QuartzCore · macOS 14+</span>
+        </div>
+        <h1 class="hero-title" data-i18n-html="hero.title">
+          Your screenshots, <em>hung out to dry</em> on a sunlit Polaroid line.
+        </h1>
+        <p class="hero-subtitle" data-i18n="hero.subtitle">
+          Every time you snap a screenshot or finish a screen recording, SnapLine drops a braided clothesline across the top quarter of your Mac. Older captures gently sway left as your newest shot arcs up and clips onto the rope.
+        </p>
+
+        <div class="hero-ctas">
+          <a class="btn-primary btn-lg" href="https://github.com/sotacom/SnapLine/releases/latest/download/SnapLine-1.0.0-macos-arm64.dmg">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span data-i18n="hero.ctaDownload">Download for macOS (.dmg)</span>
+          </a>
+          <a class="btn-secondary btn-lg" href="https://github.com/sotacom/SnapLine/releases/latest" target="_blank" rel="noopener">
+            <span data-i18n="hero.ctaReleases">v1.0.0 Release Notes</span>
+          </a>
+        </div>
+
+        <div class="hero-specs">
+          <span>Apple Silicon (arm64)</span>
+          <span>·</span>
+          <span>~1.1 MB Binary</span>
+          <span>·</span>
+          <span>120fps ProMotion</span>
+          <span>·</span>
+          <span data-i18n="hero.specZeroCpu">0% Idle CPU</span>
+          <span>·</span>
+          <span>MIT Open Source</span>
+        </div>
+      </div>
+
+      <!-- Interactive Live Clothesline Simulator -->
+      <div class="playground-wrapper">
+        <div class="playground-toolbar container">
+          <div class="toolbar-left">
+            <button type="button" id="btn-simulate-capture" class="btn-capture">
+              <span class="shutter-icon" aria-hidden="true"></span>
+              <span data-i18n="sim.captureBtn">Simulate New Capture</span>
+            </button>
+            <span class="toolbar-hint" data-i18n="sim.hint">Drag or scroll horizontally · Hover cards · Watch the 4-stage clip animation</span>
+          </div>
+          <div class="toolbar-right">
+            <button type="button" id="btn-scroll-older" class="icon-nav-btn" title="Older" aria-label="Scroll to older captures">
+              ←
+            </button>
+            <button type="button" id="btn-scroll-newer" class="icon-nav-btn" title="Newer" aria-label="Scroll to newest captures">
+              →
+            </button>
+          </div>
+        </div>
+
+        <div class="clothesline-stage" id="clothesline-stage" aria-label="Interactive Clothesline Demo">
+          <div class="stage-veil" aria-hidden="true"></div>
+          <svg id="rope-svg" class="rope-svg" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <pattern id="jute-pattern" width="32" height="10" patternUnits="userSpaceOnUse">
+                <rect width="32" height="10" fill="#B58752" />
+                <path d="M0,10 C8,2 10,8 16,0" stroke="#6E4924" stroke-width="2.3" fill="none" />
+                <path d="M16,10 C24,2 26,8 32,0" stroke="#6E4924" stroke-width="2.3" fill="none" />
+                <path d="M4,10 C12,2 14,8 20,0" stroke="#E4C697" stroke-width="1.8" fill="none" />
+                <path d="M20,10 C28,2 30,8 36,0" stroke="#E4C697" stroke-width="1.8" fill="none" />
+                <line x1="0" y1="1.2" x2="32" y2="1.2" stroke="#F0D8B1" stroke-width="0.9" opacity="0.6" />
+                <line x1="0" y1="8.8" x2="32" y2="8.8" stroke="#4D3115" stroke-width="1.1" opacity="0.65" />
+              </pattern>
+              <filter id="rope-shadow" x="-5%" y="-30%" width="110%" height="220%">
+                <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#1A120B" flood-opacity="0.28" />
+              </filter>
+            </defs>
+            <path id="rope-path-shadow" d="" fill="none" stroke="rgba(20,14,8,0.22)" stroke-width="9" stroke-linecap="round" />
+            <path id="rope-path-main" d="" fill="none" stroke="url(#jute-pattern)" stroke-width="8.5" stroke-linecap="round" filter="url(#rope-shadow)" />
+          </svg>
+          <div id="cards-layer" class="cards-layer"></div>
+          <div id="stage-toast" class="stage-toast" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Native macOS Render Showcase -->
+    <section id="preview" class="section-block">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker" data-i18n="preview.kicker">Real Native Output</span>
+          <h2 data-i18n="preview.title">Pure AppKit &amp; QuartzCore. Zero Electron bloat.</h2>
+          <p data-i18n="preview.desc">
+            Actual 2880×680 Retina offscreen render directly from SnapLine’s CoreGraphics procedural rope, beechwood clothespins, and GPU-accelerated layer pool.
+          </p>
+        </div>
+
+        <div class="mac-frame">
+          <div class="mac-menubar">
+            <div class="mac-menubar-left">
+              <span></span>
+              <strong>Finder</strong>
+              <span>File</span>
+              <span>Edit</span>
+              <span>View</span>
+            </div>
+            <div class="mac-menubar-right">
+              <span class="active-menubar-pill">
+                <svg viewBox="0 0 20 18" width="14" height="13" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M1.5 4.5 Q10 8.5 18.5 4.5" stroke-linecap="round"/>
+                  <rect x="4" y="6.5" width="5" height="6.5" rx="0.6"/>
+                  <rect x="11" y="6.5" width="5" height="6.5" rx="0.6"/>
+                </svg>
+                SnapLine
+              </span>
+              <span>⌘⇧L</span>
+              <span>22:48</span>
+            </div>
+          </div>
+          <img src="assets/hero-preview.png" alt="SnapLine Real Native macOS Render" class="mac-render-img" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Bento Grid -->
+    <section id="features" class="section-block section-alt">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker" data-i18n="features.kicker">Crafted for Speed &amp; Tactility</span>
+          <h2 data-i18n="features.title">Lightweight mechanics with unmistakable physical warmth.</h2>
+        </div>
+
+        <div class="bento-grid">
+          <article class="bento-card bento-wide">
+            <div class="bento-badge">01 · Choreography</div>
+            <h3 data-i18n="feat.choreoTitle">4-Stage New Capture Physics</h3>
+            <p data-i18n="feat.choreoDesc">
+              When a screenshot saves, the line lowers gently with a light breeze, older Polaroids slide left along the curve, and the new shot arcs up from the bottom-right until the wooden pin snaps shut—sending an elastic ripple down the rope.
+            </p>
+          </article>
+
+          <article class="bento-card">
+            <div class="bento-badge">02 · Performance</div>
+            <h3 data-i18n="feat.perfTitle">120fps &amp; 0% Idle CPU</h3>
+            <p data-i18n="feat.perfDesc">
+              Demand-driven CADisplayLink freezes automatically once pendulums settle. Virtualized layer pooling keeps memory tiny even with 2,000+ screenshots.
+            </p>
+          </article>
+
+          <article class="bento-card">
+            <div class="bento-badge">03 · Workflow</div>
+            <h3 data-i18n="feat.dragTitle">Drag, Quick Look &amp; Video</h3>
+            <p data-i18n="feat.dragDesc">
+              Drag Polaroids straight into Slack, Figma, or Finder. Single-click for Quick Look, or hover any .mov / .mp4 screen recording for an instant inline loop.
+            </p>
+          </article>
+
+          <article class="bento-card">
+            <div class="bento-badge">04 · Precision</div>
+            <h3 data-i18n="feat.scrollTitle">1:1 Trackpad Timeline</h3>
+            <p data-i18n="feat.scrollDesc">
+              Chronologically sorted oldest-left to newest-right. Native Trackpad momentum, zero implicit animation ghosting, and ahead-of-scroll thumbnail prefetching.
+            </p>
+          </article>
+
+          <article class="bento-card">
+            <div class="bento-badge">05 · Custom Folder</div>
+            <h3 data-i18n="feat.folderTitle">Custom Location &amp; Instant Mode</h3>
+            <p data-i18n="feat.folderDesc">
+              Auto-reads your macOS screenshot folder or lets you pick any directory with optional system sync—plus a 1-click toggle to bypass macOS’s 5s thumbnail delay.
+            </p>
+          </article>
+
+          <article class="bento-card bento-wide">
+            <div class="bento-badge">06 · Privacy First</div>
+            <h3 data-i18n="feat.privacyTitle">100% Local. Zero Telemetry. Zero Cloud.</h3>
+            <p data-i18n="feat.privacyDesc">
+              Your screenshots never leave your Mac. No analytics, no accounts, no network entitlements—just an open-source Swift binary (~1.1 MB) you can inspect and build yourself.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Install & Quick Start -->
+    <section id="install" class="section-block">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-kicker" data-i18n="install.kicker">Get Started in 30 Seconds</span>
+          <h2 data-i18n="install.title">Install on macOS 14+ (Apple Silicon)</h2>
+        </div>
+
+        <div class="install-grid">
+          <div class="install-step">
+            <span class="step-num">1</span>
+            <h3 data-i18n="install.s1Title">Download &amp; Drag</h3>
+            <p data-i18n="install.s1Desc">Grab SnapLine-1.0.0-macos-arm64.dmg from GitHub Releases and drag SnapLine.app into Applications.</p>
+            <a class="btn-primary btn-sm" href="https://github.com/sotacom/SnapLine/releases/latest/download/SnapLine-1.0.0-macos-arm64.dmg" data-i18n="install.s1Btn">Download .dmg (v1.0.0)</a>
+          </div>
+
+          <div class="install-step">
+            <span class="step-num">2</span>
+            <h3 data-i18n="install.s2Title">Clear Gatekeeper (Ad-hoc Signed)</h3>
+            <p data-i18n="install.s2Desc">Because this open-source build is ad-hoc signed rather than Apple-notarized, run once before launching:</p>
+            <div class="code-box">
+              <code id="cmd-xattr">xattr -cr /Applications/SnapLine.app</code>
+              <button type="button" class="copy-code-btn" data-copy-target="cmd-xattr" data-i18n="common.copy">Copy</button>
+            </div>
+          </div>
+
+          <div class="install-step">
+            <span class="step-num">3</span>
+            <h3 data-i18n="install.s3Title">Or Build from Source (No Xcode)</h3>
+            <p data-i18n="install.s3Desc">Compile and sign directly using Apple Swift Command Line Tools:</p>
+            <div class="code-box">
+              <code id="cmd-build">git clone https://github.com/sotacom/SnapLine.git &amp;&amp; cd SnapLine &amp;&amp; ./scripts/build_app.sh</code>
+              <button type="button" class="copy-code-btn" data-copy-target="cmd-build" data-i18n="common.copy">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="shortcut-strip">
+          <div><kbd>⌘⇧L</kbd> <span data-i18n="keys.toggle">Toggle Clothesline</span></div>
+          <div><kbd>←</kbd> <kbd>→</kbd> <span data-i18n="keys.scroll">Scroll History</span></div>
+          <div><kbd>Click</kbd> / <kbd>Space</kbd> <span data-i18n="keys.ql">Quick Look</span></div>
+          <div><kbd>Drag</kbd> <span data-i18n="keys.drag">Drop to Other Apps</span></div>
+          <div><kbd>ESC</kbd> <span data-i18n="keys.dismiss">Dismiss</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/app-icon.png" alt="" width="24" height="24" />
+        <span><strong>SnapLine</strong> · MIT Open Source</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/sotacom/SnapLine" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/sotacom/SnapLine/releases" target="_blank" rel="noopener">Releases</a>
+        <a href="https://github.com/sotacom/SnapLine/blob/main/docs/USER_GUIDE.md" target="_blank" rel="noopener" data-i18n="footer.guide">User Guide</a>
+        <a href="https://github.com/sotacom/SnapLine/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener" data-i18n="footer.arch">Architecture</a>
+        <a href="https://github.com/sotacom/SnapLine/blob/main/docs/TROUBLESHOOTING.md" target="_blank" rel="noopener" data-i18n="footer.troubleshoot">Troubleshooting</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
