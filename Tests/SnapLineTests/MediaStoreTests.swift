@@ -81,5 +81,13 @@ enum MediaStoreTests {
             try expect(reloaded.hotKey == .optShiftS)
             try expect(reloaded.watchedFolderURL.standardizedFileURL.path == tempDir.standardizedFileURL.path)
         }
+
+        runner.add("OverlayInteraction.firstClickAndNonActivatingPanelDefaults") {
+            let view = ClotheslineView(frame: NSRect(x: 0, y: 0, width: 800, height: 320))
+            try expect(view.acceptsFirstMouse(for: nil), "ClotheslineView must accept first mouse click without extra focus click")
+
+            let panel = OverlayPanel()
+            try expect(panel.becomesKeyOnlyIfNeeded, "OverlayPanel should preserve target app focus during drag-and-drop")
+        }
     }
 }

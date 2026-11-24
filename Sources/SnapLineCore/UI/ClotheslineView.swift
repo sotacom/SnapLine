@@ -35,6 +35,7 @@ public final class ClotheslineView: NSView, NSDraggingSource {
     private var videoHoverWorkItem: DispatchWorkItem?
 
     private var mouseDownPoint: CGPoint = .zero
+    private var mouseDownEvent: NSEvent?
     private var dragCandidate: (item: MediaItem, index: Int, layer: PolaroidCardLayer)?
     private var pendingButtonPress: (item: MediaItem, layer: PolaroidCardLayer, action: CardAction)?
     private var clickedEmptySpace: Bool = false
@@ -43,6 +44,8 @@ public final class ClotheslineView: NSView, NSDraggingSource {
     private var ropeNeedsRedraw: Bool = true
 
     public override var isFlipped: Bool { true }
+    public override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
+    public override func shouldDelayWindowOrdering(for event: NSEvent) -> Bool { true }
 
     public override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -534,6 +537,7 @@ public final class ClotheslineView: NSView, NSDraggingSource {
     public override func mouseDown(with event: NSEvent) {
         let point = convert(event.locationInWindow, from: nil)
         mouseDownPoint = point
+        mouseDownEvent = event
         didStartDragging = false
         dragCandidate = nil
         pendingButtonPress = nil
@@ -556,17 +560,18 @@ public final class ClotheslineView: NSView, NSDraggingSource {
         guard !didStartDragging, let candidate = dragCandidate else { return }
         let current = convert(event.locationInWindow, from: nil)
         let dist = hypot(current.x - mouseDownPoint.x, current.y - mouseDownPoint.y)
-        guard dist > 6.0 else { return }
+        guard dist > 4.0 else { return }
 
         didStartDragging = true
         onDraggingStateChanged?(true)
+        NSApp.preventWindowOrdering()
 
         let draggingItem = NSDraggingItem(pasteboardWriter: candidate.item.url as NSURL)
         let previewImage = candidate.layer.makeDragPreviewImage()
         let frameInView = candidate.layer.frame
         draggingItem.setDraggingFrame(frameInView, contents: previewImage)
 
-        beginDraggingSession(with: [draggingItem], event: event, source: self)
+        beginDraggingSession(with: [draggingItem], event: mouseDownEvent ?? event, source: self)
     }
 
     public override func mouseUp(with event: NSEvent) {
@@ -587,6 +592,7 @@ public final class ClotheslineView: NSView, NSDraggingSource {
             onRequestDismiss?()
         }
 
+        mouseDownEvent = nil
         pendingButtonPress = nil
         dragCandidate = nil
         clickedEmptySpace = false

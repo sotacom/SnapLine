@@ -15,6 +15,7 @@ public final class OverlayPanel: NSPanel {
 
         level = .floating
         isFloatingPanel = true
+        becomesKeyOnlyIfNeeded = true
         hidesOnDeactivate = false
         isOpaque = false
         backgroundColor = .clear

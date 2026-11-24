@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://sotacom.github.io/SnapLine/"><img src="https://img.shields.io/badge/Website-Landing_Page-B37D43?style=flat-square" alt="Landing Page"/></a>
-  <a href="https://github.com/sotacom/SnapLine/releases/latest"><img src="https://img.shields.io/badge/Release-v1.0.0-2E7D32?style=flat-square" alt="Latest Release"/></a>
+  <a href="https://github.com/sotacom/SnapLine/releases/latest"><img src="https://img.shields.io/badge/Release-v1.0.1-2E7D32?style=flat-square" alt="Latest Release"/></a>
   <img src="https://img.shields.io/badge/macOS-14.0%2B_(Apple_Silicon)-1C1713?style=flat-square" alt="macOS 14+"/>
   <img src="https://img.shields.io/badge/Swift-Native_AppKit_%2B_QuartzCore-F05138?style=flat-square" alt="Swift Native"/>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="MIT License"/></a>
@@ -49,7 +49,7 @@
 
 ### Option 1: Download Prebuilt App (Recommended)
 
-1. Download **`SnapLine-1.0.0-macos-arm64.dmg`** (or `.zip`) from the [Latest Release](https://github.com/sotacom/SnapLine/releases/latest).
+1. Download **`SnapLine-1.0.1-macos-arm64.dmg`** (or `.zip`) from the [Latest Release](https://github.com/sotacom/SnapLine/releases/latest).
 2. Open the `.dmg` and drag **SnapLine.app** into **Applications**.
 3. **First-launch Gatekeeper note:** SnapLine is open-source and ad-hoc code-signed (not Apple-notarized). Before first launch, run:
    ```bash
@@ -65,14 +65,14 @@ Requires macOS 14+ with Apple Swift Command Line Tools (`xcode-select --install`
 git clone https://github.com/sotacom/SnapLine.git
 cd SnapLine
 
-# Run all 11 unit tests
+# Run all 12 unit tests
 swift run SnapLineTestSuite
 
 # Build & ad-hoc sign build/SnapLine.app
 ./scripts/build_app.sh
 
 # Optional: Package .dmg + .zip + SHA256SUMS.txt into dist/
-./scripts/package_release.sh 1.0.0
+./scripts/package_release.sh 1.0.1
 ```
 
 ---
